@@ -1,0 +1,84 @@
+<form role="form" method="post">
+    {% csrf_token %}
+
+    {% if customer_create_form.errors or ticket_create_form.errors %}
+        <div class="form-errors-container alert alert-danger">
+            <h4>We encountered some errors:</h4>
+
+            <ul>
+                {% for error in customer_create_form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+
+                {% for error in ticket_create_form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+
+                {% for field in customer_create_form %}
+                    {% if field.errors %}
+                        <li>{{ field.label }}</li>
+                        <ul>
+                            <li>{{ field.errors|striptags }}</li>
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+
+                {% for field in ticket_create_form %}
+                    {% if field.errors %}
+                        <li>{{ field.label }}</li>
+                        <ul>
+                            <li>{{ field.errors|striptags }}</li>
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <h3>Customer Info</h3>
+
+    <div class="form-group">
+        <label>{{ customer_create_form.email_address.label }}</label>
+        <input
+            name="{{ customer_create_form.email_address.html_name }}"
+            class="form-control"
+            value="{{ customer_create_form.email_address.value|default_if_none:'' }}"
+        >
+    </div>
+    <div class="form-group">
+        <label>{{ customer_create_form.first_name.label }}</label>
+        <input
+            name="{{ customer_create_form.first_name.html_name }}"
+            class="form-control"
+            value="{{ customer_create_form.first_name.value|default_if_none:'' }}"
+        >
+    </div>
+    <div class="form-group">
+        <label>{{ customer_create_form.last_name.label }}</label>
+        <input
+            name="{{ customer_create_form.last_name.html_name }}"
+            class="form-control"
+            value="{{ customer_create_form.last_name.value|default_if_none:'' }}"
+        >
+    </div>
+
+    <h3>Ticket</h3>
+
+    <div class="form-group">
+        <label>{{ ticket_create_form.title.label }}</label>
+        <input
+            type="text"
+            name="{{ ticket_create_form.title.html_name }}"
+            value="{{ ticket_create_form.title.value|default_if_none:'' }}"
+            maxlength="100"
+            class="form-control">
+    </div>
+    <div class="form-group">
+        <label>{{ ticket_create_form.body.label }}</label>
+        <textarea
+            name="{{ ticket_create_form.body.html_name }}"
+            class="form-control"
+        >{{ ticket_create_form.body.value|default_if_none:'' }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-theme">Submit</button>
+</form>

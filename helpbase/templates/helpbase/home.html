@@ -1,0 +1,20 @@
+<h2>Customers</h2>
+<ul>
+{% for customer in object_list %}
+    <li>
+        <div>
+            <p>{{ customer.email_address }}</p>
+            <h3>Tickets</h3>
+            <ul>
+                {% for ticket in customer.tickets %}
+                    <li>{{ ticket.title }}</li>
+                {% empty %}
+                    <li>No tickets yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </li>
+{% empty %}
+    <li>No customers yet.</li>
+{% endfor %}
+</ul>
