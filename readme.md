@@ -1,7 +1,7 @@
 Help Base
 ========================
 
-### An attempt to implement DDD and hexagonal architecture in Python using Django framework w/o replacing Django's core components.
+An attempt to implement DDD and hexagonal architecture in Python using Django framework w/o replacing Django's core components.
 
 Domain
 ========================
