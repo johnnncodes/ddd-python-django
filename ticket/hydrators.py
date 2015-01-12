@@ -11,10 +11,10 @@ class TicketHydrator(object):
     def hydrate(self):
         pass
 
-    def extract(self, ticketOrTickets, many=False):
+    def extract(self, ticket_or_tickets, many=False):
         if many:
             extracted_tickets = []
-            for ticket in ticketOrTickets:
+            for ticket in ticket_or_tickets:
                 extracted_ticket = self.__extract(ticket)
                 extracted_tickets.append(extracted_ticket)
             return extracted_tickets
