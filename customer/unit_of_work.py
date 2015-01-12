@@ -84,7 +84,7 @@ class CustomerUnitOfWork(object):
     def commit(self):
         for entity in self.__storage:
             if self.__storage[entity] == self.STATE_NEW:
-                self.__mapper.save(entity)
+                self.__mapper.create(entity)
             elif self.__storage[entity] == self.STATE_DIRTY:
                 self.__mapper.update(entity)
             elif self.__storage[entity] == self.STATE_REMOVED:

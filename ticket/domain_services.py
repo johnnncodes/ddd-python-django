@@ -2,7 +2,7 @@ import uuid
 
 from customer.entities import Customer
 from customer.models import CustomerModel
-from helpbase.customer_unit_of_work import CustomerUnitOfWork
+from customer.unit_of_work import CustomerUnitOfWork
 from helpbase.exceptions import InvalidInputsException
 from customer.mappers import CustomerMapper
 from customer.value_objects import EmailAddress

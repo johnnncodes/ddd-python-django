@@ -1,10 +1,16 @@
 from ticket.models import TicketModel
 from ticket.entities import Ticket
 from ticket.value_objects import Title
-from helpbase.mapper import AbstractDataMapper
+from helpbase.mappers import AbstractDataMapper
 
 
 class TicketMapper(AbstractDataMapper):
+
+    def find_all(self):
+        pass
+
+    def find_by_id(self, customer_id):
+        pass
 
     def create(self, ticket):
         TicketModel(
@@ -20,7 +26,7 @@ class TicketMapper(AbstractDataMapper):
         ticket_model.body = ticket.get_body()
         ticket_model.save()
 
-    def find_by_id(self, customer_id):
+    def delete(self):
         pass
 
     def get_by_customer_id(self, customer_id):

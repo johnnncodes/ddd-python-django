@@ -1,7 +1,7 @@
 from customer.models import CustomerModel
 from customer.entities import Customer
 from ticket.mappers import TicketMapper
-from helpbase.mapper import AbstractDataMapper
+from helpbase.mappers import AbstractDataMapper
 from customer.value_objects import EmailAddress
 
 
@@ -32,7 +32,7 @@ class CustomerMapper(AbstractDataMapper):
         customer = self.__load_entity(customer_model, ticket_entities)
         return customer
 
-    def save(self, customer):
+    def create(self, customer):
         CustomerModel(
             uuid=customer.get_uuid(),
             email_address=customer.get_email_address(),
