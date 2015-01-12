@@ -4,28 +4,28 @@ from ticket.hydrators import TicketHydrator
 class CustomerHydrator(object):
 
     def __extract(self, customer, tickets):
-        extractedCustomer = {
+        extracted_customer = {
             'uuid': customer.get_uuid(),
             'email_address': customer.get_email_address(),
             'first_name': customer.get_first_name(),
             'last_name': customer.get_last_name(),
             'tickets': tickets
         }
-        return extractedCustomer
+        return extracted_customer
 
     def hydrate(self):
         pass
 
-    def extract(self, customerOrcustomers, many=False):
+    def extract(self, customer_or_customers, many=False):
         if many:
-            extractedCustomers = []
-            for customer in customerOrcustomers:
+            extracted_customers = []
+            for customer in customer_or_customers:
                 tickets = TicketHydrator().extract(
                     customer.get_tickets(), True)
-                extractedCustomer = self.__extract(customer, tickets)
-                extractedCustomers.append(extractedCustomer)
-            return extractedCustomers
+                extracted_customer = self.__extract(customer, tickets)
+                extracted_customers.append(extracted_customer)
+            return extracted_customers
         else:
             tickets = TicketHydrator().extract(customer.get_tickets(), True)
-            extractedCustomer = self.__extract(customer, tickets)
-            return extractedCustomer
+            extracted_customer = self.__extract(customer, tickets)
+            return extracted_customer
