@@ -14,6 +14,14 @@ class UnitOfWork(object):
         if self._storage is None:
             self._storage = {}
 
+    def find_all(self):
+        entities = self._mapper.find_all()
+
+        for entity in entities:
+            self.register_clean(entity)
+
+        return entities
+
     def find_by_id(self, id):
         entity = self._mapper.find_by_id(id)
         self.register_clean(entity)
@@ -40,6 +48,7 @@ class UnitOfWork(object):
             elif self._storage[entity] == self.STATE_REMOVED:
                 self._mapper.delete(entity)
 
+    # TODO: implement this
     def rollback(self):
         pass
 

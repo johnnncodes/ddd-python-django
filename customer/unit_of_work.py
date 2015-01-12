@@ -1,5 +1,6 @@
 from ticket.mappers import TicketMapper
 from helpbase.unit_of_work import UnitOfWork
+from customer.mappers import CustomerMapper
 
 
 class CustomerUnitOfWork(UnitOfWork):
@@ -7,28 +8,27 @@ class CustomerUnitOfWork(UnitOfWork):
     __ticket_mapper = None
     __ticket_storage = None
 
-    def __init__(self, mapper):
-        super(CustomerUnitOfWork, self).__init__(mapper)
+    def __init__(self):
+        super(CustomerUnitOfWork, self).__init__(CustomerMapper())
 
+        # TODO: check if we can set __ticket_mapper = TicketMapper()
+        # directly at the top?
         self.__ticket_mapper = TicketMapper()
 
         if self.__ticket_storage is None:
             self.__ticket_storage = {}
 
     def find_all(self):
-        customer_entities = self._mapper.find_all()
+        customer_entities = super(CustomerUnitOfWork, self).find_all()
 
         for customer_entity in customer_entities:
-            self.register_clean(customer_entity)
-
             for ticket in customer_entity.get_tickets():
                 self.ticket_register_clean(ticket)
 
         return customer_entities
 
     def find_by_id(self, id):
-        entity = self._mapper.find_by_id(id)
-        self.register_clean(entity)
+        entity = super(CustomerUnitOfWork, self).find_by_id(id)
 
         for ticket in entity.get_tickets():
             self.ticket_register_clean(ticket)

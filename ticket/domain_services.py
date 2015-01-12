@@ -4,7 +4,6 @@ from customer.entities import Customer
 from customer.models import CustomerModel
 from customer.unit_of_work import CustomerUnitOfWork
 from helpbase.exceptions import InvalidInputsException
-from customer.mappers import CustomerMapper
 from customer.value_objects import EmailAddress
 from customer.forms import CustomerCreateForm
 from ticket.value_objects import Title
@@ -39,7 +38,7 @@ class TicketCreateService(object):
         self.__customer_create_form = customer_create_form
 
         if customer_create_form.is_valid() and ticket_create_form.is_valid():
-            session = CustomerUnitOfWork(CustomerMapper())
+            session = CustomerUnitOfWork()
 
             try:
                 customer = session.find_by_email_address(email_address)
