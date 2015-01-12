@@ -9,13 +9,15 @@ from helpbase.exceptions import InvalidInputsException
 
 class TicketCreateView(View):
 
+    template_name = 'ticket/create.html'
+
     def get(self, request, *args, **kwargs):
         ticket_create_form = TicketCreateForm()
         customer_create_form = CustomerCreateForm()
 
         return render(
             request,
-            'ticket/create.html',
+            self.template_name,
             {
                 'ticket_create_form': ticket_create_form,
                 'customer_create_form': customer_create_form
@@ -45,7 +47,7 @@ class TicketCreateView(View):
                 ticketCreateService.get_form()
             return render(
                 request,
-                'ticket/create.html',
+                self.template_name,
                 {
                     'ticket_create_form': ticket_create_form,
                     'customer_create_form': customer_create_form
