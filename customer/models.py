@@ -9,7 +9,7 @@ class CustomerModel(models.Model):
 
     # TODO: set unique to True and just override it on the form
     # since we want the form to be valid even if the email address
-    # already exists in the database. The mapper will be resposible for
+    # already exists in the database. The mapper will be responsible for
     # making sure that there will be no duplicated email addresses in the db.
     # We still want to set unique=True in the model though just to make sure.
     email_address = models.EmailField(max_length=254, unique=False)
