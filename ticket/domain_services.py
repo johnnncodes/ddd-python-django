@@ -31,6 +31,10 @@ class TicketCreateService(object):
             'body': body
         }
 
+        # NOTE: we are depending on these 2 forms that extends
+        # django.forms.ModelForm, but since we are only instantiating them and
+        # only calling the is_valid methods, I guess it's fine. I think there's
+        # no point in creating a class that will wrap them.
         ticket_create_form = TicketCreateForm(inputs)
         customer_create_form = CustomerCreateForm(inputs)
 
